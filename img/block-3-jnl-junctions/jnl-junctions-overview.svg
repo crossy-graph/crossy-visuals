@@ -12,7 +12,7 @@
 <text x="415.0" y="202.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">OCMDP term</text>
 <text x="415.0" y="222.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#042c53" opacity="0.75">e.g. ‘location’</text>
 <line x1="525.0" y1="210.0" x2="725.0" y2="210.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="625.0" y="196.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">admissible class</text>
+<text x="625.0" y="196.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">admissible class</text>
 <rect x="725.0" y="170.0" width="220.0" height="80.0" rx="10" fill="#fde8dd" stroke="#b5512a" stroke-width="1"/>
 <text x="835.0" y="202.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">MaCHeCO entity</text>
 <text x="835.0" y="222.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#4a1b0c" opacity="0.75">e.g. E53 Place</text>
@@ -25,7 +25,7 @@
 <text x="148.3" y="442.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">Metadata resource</text>
 <text x="148.3" y="462.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#042c53" opacity="0.75">dataset, record, FDO</text>
 <line x1="216.7" y1="450.0" x2="306.7" y2="450.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="261.7" y="436.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">describes</text>
+<text x="261.7" y="436.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">describes</text>
 <rect x="306.7" y="410.0" width="136.7" height="80.0" rx="10" fill="#fde8dd" stroke="#b5512a" stroke-width="1"/>
 <text x="375.0" y="442.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">Domain entity</text>
 <text x="375.0" y="462.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#4a1b0c" opacity="0.75">e.g. crm:E22</text>
@@ -34,7 +34,7 @@
 <text x="551.7" y="442.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">Node object</text>
 <text x="551.7" y="462.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#4a1b0c" opacity="0.75">as concept</text>
 <line x1="620.0" y1="450.0" x2="710.0" y2="450.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="665.0" y="436.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">exactMatch</text>
+<text x="665.0" y="436.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">exactMatch</text>
 <rect x="710.0" y="410.0" width="136.7" height="80.0" rx="10" fill="#e2f0dd" stroke="#3d7a2a" stroke-width="1"/>
 <text x="778.3" y="442.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#173404">Terminology concept</text>
 <text x="778.3" y="462.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#173404" opacity="0.75">Getty AAT, DANTE</text>
@@ -43,7 +43,7 @@
 <text x="955.0" y="442.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">Individual</text>
 <text x="955.0" y="462.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#4a1b0c" opacity="0.75">a specific place, object</text>
 <line x1="1023.3" y1="450.0" x2="1113.3" y2="450.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="1068.3" y="436.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">sameAs</text>
+<text x="1068.3" y="436.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">sameAs</text>
 <rect x="1113.3" y="410.0" width="136.7" height="80.0" rx="10" fill="#e2f0dd" stroke="#3d7a2a" stroke-width="1"/>
 <text x="1181.7" y="442.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#173404">Authority item</text>
 <text x="1181.7" y="462.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#173404" opacity="0.75">Wikidata, OSM</text>

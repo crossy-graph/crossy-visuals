@@ -10,12 +10,12 @@
 <text x="150.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">Application ontology</text>
 <text x="150.0" y="187.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#4a1b0c" opacity="0.75">class</text>
 <line x1="260.0" y1="175.0" x2="350.0" y2="175.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="305.0" y="161.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R1</text>
+<text x="305.0" y="161.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R1</text>
 <rect x="350.0" y="130.0" width="190.0" height="90.0" rx="10" fill="#fde8dd" stroke="#b5512a" stroke-width="1"/>
 <text x="445.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">CIDOC CRM class</text>
 <text x="445.0" y="187.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#4a1b0c" opacity="0.75">+ extensions</text>
 <line x1="540.0" y1="175.0" x2="630.0" y2="175.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="585.0" y="161.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R2</text>
+<text x="585.0" y="161.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R2</text>
 <rect x="630.0" y="130.0" width="220.0" height="90.0" rx="10" fill="#f5f0d8" stroke="#8a7420" stroke-width="1"/>
 <text x="740.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#412402">BFO / NFDIcore</text>
 <text x="740.0" y="187.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#412402" opacity="0.75">reference alignment</text>

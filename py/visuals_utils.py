@@ -257,20 +257,42 @@ def svg_arrow(x1: float, y1: float, x2: float, y2: float, *, stroke: str = "#737
 
 def svg_arrow_labeled(x1: float, y1: float, x2: float, y2: float, label: str,
                        *, stroke: str = "#73726c", label_color: str = "#2c2c2a",
-                       above: bool = True) -> str:
-    """Straight arrow with a short label centred on it. Caller is responsible
-    for leaving enough gap between boxes for the label not to collide with
-    either -- there is no automatic width check here, unlike box_width().
-    dy=14 (not 8): at 8 the label baseline sat close enough to the line that
-    it read as "sitting on" the arrow rather than floating above it (caught
-    2026-09-10 on the JNL banner)."""
+                       above: bool = True, offset: float | None = None) -> str:
+    """Straight arrow with a short label offset to one side of it. Caller is
+    responsible for leaving enough gap between boxes for the label not to
+    collide with either -- there is no automatic width check here, unlike
+    box_width().
+
+    The offset is perpendicular to the arrow's actual direction, not a flat
+    vertical shift (a flat shift works for horizontal arrows but does
+    nothing for a vertical one -- shifting text up or down along the same
+    line it's centred on still leaves it straddling the line).
+
+    A second, easier-to-miss problem sits behind the first: for a STEEP
+    arrow the perpendicular direction is close to horizontal, and text is a
+    wide horizontal block -- a fixed small offset (14px) is far less than
+    half the label's width, so the line still runs through the middle of
+    it even once it's technically "offset". For steep arrows the offset
+    must grow with the label's width, not stay constant. (Both found
+    2026-09-10: the flat-shift bug on the system diagram's vertical
+    "curated & validated in" connector, the width-independence bug on the
+    same label after the first fix still left it crossed.)
+    """
     mx, my = (x1 + x2) / 2, (y1 + y2) / 2
-    dy = -14 if above else 22
+    dx, dy_dir = x2 - x1, y2 - y1
+    length = (dx ** 2 + dy_dir ** 2) ** 0.5 or 1.0
+    steep = abs(dy_dir) > abs(dx)
+    if offset is None:
+        offset = text_width(label, 12) / 2 + 10 if steep else 14
+    perp_x, perp_y = dy_dir / length, -dx / length
+    if not above:
+        perp_x, perp_y = -perp_x, -perp_y
+    tx, ty = mx + perp_x * offset, my + perp_y * offset
     return (
         svg_arrow(x1, y1, x2, y2, stroke=stroke)
-        + f'\n<text x="{mx:.1f}" y="{my + dy:.1f}" text-anchor="middle" '
-        f'font-family="Fira Sans" font-weight="500" font-size="12" '
-        f'fill="{label_color}">{xml_escape(label)}</text>'
+        + f'\n<text x="{tx:.1f}" y="{ty:.1f}" text-anchor="middle" '
+        f'dominant-baseline="central" font-family="Fira Sans" font-weight="500" '
+        f'font-size="12" fill="{label_color}">{xml_escape(label)}</text>'
     )
 
 

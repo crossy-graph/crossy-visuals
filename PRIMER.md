@@ -98,6 +98,7 @@ Eigenschaften, an denen sich ein fertiger Block messen lassen muss:
 | Zoom-Stufe | **Vierte Korrektur:** `BADGE_HEAD_BOTTOM_FRAC = 0.45` wirkte zu nah rangezoomt ("das ist zu nah rangezoomt"). Auf `0.52` erweitert — mehr Luft um den Kopf, ohne die Graph-Dekoration wieder einzufangen (gegen alle drei Varianten geprüft) | 2026-09-10 |
 | Pfeil-Label-Abstand | **Design-Feinschliff (nach S6):** `svg_arrow_labeled()` hatte nur 8px Abstand zwischen Pfeillinie und Label-Baseline — wirkte wie Text, der auf dem Pfeil sitzt, statt darüber zu schweben (Florian am JNL-Banner aufgefallen). Auf 14px erhöht. Betrifft alle 27 Stellen, die `svg_arrow_labeled()` nutzen (Block 2–4, System) — alle nachgeprüft, keine neuen Kollisionen | 2026-09-10 |
 | Schema-Level-Container-Innenabstand | Boxen berührten exakt den unteren Container-Rand (0px Polsterung) in Block 3s Banner, während "Instance-level junctions" ~30px Polsterung hatte — Container-Höhe von 130 auf 170 erhöht, nachfolgende Koordinaten verschoben | 2026-09-10 |
+| Pfeil-Label-Versatz bei steilen Pfeilen | Fester Versatz (egal ob 8 oder 14px) funktioniert nur bei waagerechten Pfeilen. Neu: Versatz senkrecht zur tatsächlichen Pfeilrichtung, und bei steilen Pfeilen abhängig von der Label-Breite (`text_width()/2 + 10`) statt fix — sonst läuft die Linie bei breiten Labels weiterhin mitten durch den Text | 2026-09-10 |
 | Arrow-Marker in resvg | `context-stroke` (aus dem Chat-Visualizer-Muster übernommen) wird von resvg NICHT unterstützt — Pfeilspitzen blieben unsichtbar. Fest auf `#73726c` gepinnt (`ARROW_STROKE` in `visuals_utils.py`) | 2026-09-10 |
 
 ### A5 Was in welchem Chat hochgeladen wird
@@ -358,6 +359,22 @@ Schema-Level-Container. Beides behoben (siehe A4), alle fünf Schritte neu
 gebaut, Blöcke 1 und (bis auf die Label-Abstände) 2/4/System stichprobenartig
 gegen Regressionen geprüft, komplettes Repo zweimal durchlaufen lassen —
 byte-identisch.
+
+### Nachtrag 2026-09-10 (2) — derselbe Bug nochmal, tiefer
+
+Florian fand denselben Effekt am `crossy-system-architecture`-Banner: der
+senkrechte Pfeil "curated & validated in" lief mitten durchs Label. Der
+erste Fix (fester 14px-Versatz) half nur bei waagerechten Pfeilen — bei
+senkrechten verschiebt ein rein vertikaler Versatz das Label entlang der
+Linie, nie davon weg. Zweiter Fix: Versatz jetzt senkrecht zur *tatsächlichen*
+Pfeilrichtung berechnet. Dabei fiel ein zweiter, subtilerer Fehler auf: bei
+steilen Pfeilen ist die Senkrechte fast waagerecht, und ein fester
+14px-Versatz ist bei einem 150px breiten Label wie "curated & validated in"
+viel zu wenig — die Linie lag immer noch mitten im Textblock. Jetzt wächst
+der Versatz bei steilen Pfeilen mit der Label-Breite (`text_width()/2 + 10`)
+statt fix zu sein. Alle 27 Stellen erneut geprüft, insbesondere die
+schrägen (`grouped by`, `valid`/`invalid`, `one-off migration`) — keine
+Regression, das Repo baut weiterhin byte-identisch.
 
 ## Teil D — Offene Punkte
 
