@@ -10,12 +10,12 @@
 <text x="150.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">Application metadata</text>
 <text x="150.0" y="187.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#042c53" opacity="0.75">schema element</text>
 <line x1="260.0" y1="175.0" x2="330.0" y2="175.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="295.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R3</text>
+<text x="295.0" y="161.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R3</text>
 <rect x="330.0" y="130.0" width="170.0" height="90.0" rx="10" fill="#dde9fb" stroke="#2a5ab5" stroke-width="1"/>
 <text x="415.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">OCMDP term</text>
 <text x="415.0" y="187.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#042c53" opacity="0.75">core term</text>
 <line x1="500.0" y1="175.0" x2="570.0" y2="175.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="535.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R4</text>
+<text x="535.0" y="161.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R4</text>
 <rect x="570.0" y="130.0" width="250.0" height="90.0" rx="10" fill="#f5f0d8" stroke="#8a7420" stroke-width="1"/>
 <text x="695.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#412402">NCMDP element</text>
 <text x="695.0" y="187.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#412402" opacity="0.75">NFDI Core Metadata Profile</text>

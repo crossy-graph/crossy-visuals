@@ -10,7 +10,7 @@
 <text x="175.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">OCMDP term</text>
 <text x="175.0" y="187.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#042c53" opacity="0.75">concept or entity object</text>
 <line x1="290.0" y1="175.0" x2="380.0" y2="175.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="335.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R5</text>
+<text x="335.0" y="161.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R5</text>
 <rect x="380.0" y="130.0" width="280.0" height="90.0" rx="10" fill="#e2f0dd" stroke="#3d7a2a" stroke-width="1"/>
 <text x="520.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#173404">Admissible terminologies</text>
 <text x="520.0" y="187.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#173404" opacity="0.75">one or more may apply</text>

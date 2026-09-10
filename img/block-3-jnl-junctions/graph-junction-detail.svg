@@ -11,7 +11,7 @@
 <text x="175.0" y="197.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#042c53" opacity="0.75">dataset, record, FDO</text>
 <text x="175.0" y="254.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#5f5e5a">in the metadata graph</text>
 <line x1="290.0" y1="185.0" x2="460.0" y2="185.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="375.0" y="177.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">describes / is about</text>
+<text x="375.0" y="171.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">describes / is about</text>
 <rect x="460.0" y="140.0" width="230.0" height="90.0" rx="10" fill="#fde8dd" stroke="#b5512a" stroke-width="1"/>
 <text x="575.0" y="177.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">Domain entity</text>
 <text x="575.0" y="197.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#4a1b0c" opacity="0.75">e.g. crm:E22, crm:E53</text>

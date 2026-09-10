@@ -260,9 +260,12 @@ def svg_arrow_labeled(x1: float, y1: float, x2: float, y2: float, label: str,
                        above: bool = True) -> str:
     """Straight arrow with a short label centred on it. Caller is responsible
     for leaving enough gap between boxes for the label not to collide with
-    either -- there is no automatic width check here, unlike box_width()."""
+    either -- there is no automatic width check here, unlike box_width().
+    dy=14 (not 8): at 8 the label baseline sat close enough to the line that
+    it read as "sitting on" the arrow rather than floating above it (caught
+    2026-09-10 on the JNL banner)."""
     mx, my = (x1 + x2) / 2, (y1 + y2) / 2
-    dy = -8 if above else 16
+    dy = -14 if above else 22
     return (
         svg_arrow(x1, y1, x2, y2, stroke=stroke)
         + f'\n<text x="{mx:.1f}" y="{my + dy:.1f}" text-anchor="middle" '

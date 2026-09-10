@@ -10,7 +10,7 @@
 <text x="190.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">OCMDP term</text>
 <text x="190.0" y="187.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#042c53" opacity="0.75">the property</text>
 <line x1="320.0" y1="175.0" x2="530.0" y2="175.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="425.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">declares admissible class</text>
+<text x="425.0" y="161.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">declares admissible class</text>
 <rect x="530.0" y="130.0" width="240.0" height="90.0" rx="10" fill="#fde8dd" stroke="#b5512a" stroke-width="1"/>
 <text x="650.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">MaCHeCO entity</text>
 <text x="650.0" y="187.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#4a1b0c" opacity="0.75">the object position</text>

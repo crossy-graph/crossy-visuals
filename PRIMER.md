@@ -96,6 +96,8 @@ Eigenschaften, an denen sich ein fertiger Block messen lassen muss:
 | Badges als Maskottchen-Ausschnitt | Kopf-Crop (Bildanteil 44–90 % Breite, 0–44 % Höhe, generalisiert über alle vier Varianten), quadratisch gepolstert, als Medaillon (Kreis in Komponentenfarbe) gerahmt | 2026-09-10 |
 | Kopf-Crop-Fraktion | **Dritte Korrektur:** `(0.47, 0.0, 0.83, 0.45)` behob die Verjüngung, aber der Crop war nicht quadratisch — das nachträgliche Auf-Quadrat-Polstern (`pad_frac`) fügte transparente Streifen oben/unten hinzu, die im Kreis als flache Farbfläche durchschienen (derselbe "Kinn abgeschnitten"-Effekt, nur eine Ebene tiefer). Neu: Crop ist von vornherein quadratisch (`BADGE_HEAD_TOP_FRAC`/`BADGE_HEAD_BOTTOM_FRAC`/`BADGE_HEAD_CENTER_X_FRAC` statt eines Rechtecks; Seitenlänge = vertikale Spanne in Pixeln, keine Polsterung mehr nötig). Kopf füllt jetzt den Kreis randvoll | 2026-09-10 |
 | Zoom-Stufe | **Vierte Korrektur:** `BADGE_HEAD_BOTTOM_FRAC = 0.45` wirkte zu nah rangezoomt ("das ist zu nah rangezoomt"). Auf `0.52` erweitert — mehr Luft um den Kopf, ohne die Graph-Dekoration wieder einzufangen (gegen alle drei Varianten geprüft) | 2026-09-10 |
+| Pfeil-Label-Abstand | **Design-Feinschliff (nach S6):** `svg_arrow_labeled()` hatte nur 8px Abstand zwischen Pfeillinie und Label-Baseline — wirkte wie Text, der auf dem Pfeil sitzt, statt darüber zu schweben (Florian am JNL-Banner aufgefallen). Auf 14px erhöht. Betrifft alle 27 Stellen, die `svg_arrow_labeled()` nutzen (Block 2–4, System) — alle nachgeprüft, keine neuen Kollisionen | 2026-09-10 |
+| Schema-Level-Container-Innenabstand | Boxen berührten exakt den unteren Container-Rand (0px Polsterung) in Block 3s Banner, während "Instance-level junctions" ~30px Polsterung hatte — Container-Höhe von 130 auf 170 erhöht, nachfolgende Koordinaten verschoben | 2026-09-10 |
 | Arrow-Marker in resvg | `context-stroke` (aus dem Chat-Visualizer-Muster übernommen) wird von resvg NICHT unterstützt — Pfeilspitzen blieben unsichtbar. Fest auf `#73726c` gepinnt (`ARROW_STROKE` in `visuals_utils.py`) | 2026-09-10 |
 
 ### A5 Was in welchem Chat hochgeladen wird
@@ -346,6 +348,16 @@ laufen lassen → `git status` bleibt leer.
 **Damit sind S1–S6 vollständig.** Alle vier Blöcke plus System-Architektur
 sind gebaut, geprüft und committet. Was jetzt noch offen ist, steht in
 Teil D.
+
+### Nachtrag 2026-09-10 — Design-Feinschliff am JNL-Banner
+
+Florian hat anhand der hochgeladenen Vorschau am `jnl-junctions-overview`
+zwei Layout-Probleme gefunden (nicht Inhalt, reines Aussehen): zu wenig
+Abstand zwischen Pfeil und Label, und fehlende Innenpolsterung im
+Schema-Level-Container. Beides behoben (siehe A4), alle fünf Schritte neu
+gebaut, Blöcke 1 und (bis auf die Label-Abstände) 2/4/System stichprobenartig
+gegen Regressionen geprüft, komplettes Repo zweimal durchlaufen lassen —
+byte-identisch.
 
 ## Teil D — Offene Punkte
 

@@ -98,7 +98,7 @@ def build_banner() -> list[str]:
     ]
 
     # -- schema-level junction --------------------------------------------------
-    parts.append(vu.svg_dashed_container(40, 120, W - 80, 130, "Schema-level junction \u2014 asserted once per term"))
+    parts.append(vu.svg_dashed_container(40, 120, W - 80, 170, "Schema-level junction \u2014 asserted once per term"))
     y = 170
     b1w = vu.box_width("OCMDP term", "e.g. \u2018location\u2019", min_width=220)
     b2w = vu.box_width("MaCHeCO entity", "e.g. E53 Place", min_width=220)
@@ -114,9 +114,9 @@ def build_banner() -> list[str]:
     ]
 
     # -- constrains ---------------------------------------------------------
-    parts.append(vu.svg_arrow(cx, 250, cx, 300, stroke=JNL["stroke"]))
-    parts.append(f'<text x="{cx:.1f}" y="278" text-anchor="middle" font-family="Fira Sans" '
+    parts.append(f'<text x="{cx:.1f}" y="283" text-anchor="middle" font-family="Fira Sans" '
                  f'font-weight="500" font-size="13" fill="{JNL_TEXT}">constrains</text>')
+    parts.append(vu.svg_arrow(cx, 290, cx, 318, stroke=JNL["stroke"]))
 
     # -- instance-level junctions ------------------------------------------
     parts.append(vu.svg_dashed_container(40, 320, W - 80, 200, "Instance-level junctions"))

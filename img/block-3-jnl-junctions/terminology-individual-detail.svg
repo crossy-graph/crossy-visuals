@@ -10,7 +10,7 @@
 <text x="175.0" y="177.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">Individual</text>
 <text x="175.0" y="197.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#4a1b0c" opacity="0.75">a specific place, object</text>
 <line x1="290.0" y1="185.0" x2="390.0" y2="185.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="340.0" y="177.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">owl:sameAs</text>
+<text x="340.0" y="171.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">owl:sameAs</text>
 <rect x="390.0" y="140.0" width="230.0" height="90.0" rx="10" fill="#e2f0dd" stroke="#3d7a2a" stroke-width="1"/>
 <text x="505.0" y="177.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#173404">Authority item</text>
 <text x="505.0" y="197.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#173404" opacity="0.75">Wikidata, GeoNames, OSM</text>

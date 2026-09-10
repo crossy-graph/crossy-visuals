@@ -7,12 +7,12 @@
 <text x="155.0" y="110.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">Application metadata</text>
 <text x="155.0" y="130.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#042c53" opacity="0.75">element</text>
 <line x1="260.0" y1="118.0" x2="330.0" y2="118.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="295.0" y="110.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R3</text>
+<text x="295.0" y="104.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R3</text>
 <rect x="330.0" y="78.0" width="150.0" height="80.0" rx="10" fill="#dde9fb" stroke="#2a5ab5" stroke-width="1"/>
 <text x="405.0" y="110.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">OCMDP term</text>
 <text x="405.0" y="130.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#042c53" opacity="0.75">core term</text>
 <line x1="480.0" y1="118.0" x2="550.0" y2="118.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="515.0" y="110.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R4</text>
+<text x="515.0" y="104.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R4</text>
 <rect x="550.0" y="78.0" width="230.0" height="80.0" rx="10" fill="#dde9fb" stroke="#2a5ab5" stroke-width="1"/>
 <text x="665.0" y="110.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">NCMDP element</text>
 <text x="665.0" y="130.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#042c53" opacity="0.75">NFDI Core Metadata Profile</text>
@@ -20,12 +20,12 @@
 <text x="155.0" y="232.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">Application ontology</text>
 <text x="155.0" y="252.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#4a1b0c" opacity="0.75">class</text>
 <line x1="260.0" y1="240.0" x2="330.0" y2="240.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="295.0" y="232.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R1</text>
+<text x="295.0" y="226.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R1</text>
 <rect x="330.0" y="200.0" width="170.0" height="80.0" rx="10" fill="#fde8dd" stroke="#b5512a" stroke-width="1"/>
 <text x="415.0" y="232.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">CIDOC CRM class</text>
 <text x="415.0" y="252.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#4a1b0c" opacity="0.75">+ extensions</text>
 <line x1="500.0" y1="240.0" x2="570.0" y2="240.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="535.0" y="232.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R2</text>
+<text x="535.0" y="226.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R2</text>
 <rect x="570.0" y="200.0" width="200.0" height="80.0" rx="10" fill="#fde8dd" stroke="#b5512a" stroke-width="1"/>
 <text x="670.0" y="232.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">BFO / NFDIcore</text>
 <text x="670.0" y="252.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#4a1b0c" opacity="0.75">reference alignment</text>
