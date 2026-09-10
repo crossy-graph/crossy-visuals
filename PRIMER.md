@@ -123,7 +123,7 @@ Entfällt — dieses Repo publiziert keine eigenen IRIs (keine RDF-Ausgabe).
 | S0 | Entscheidungen: Render-Pipeline, Blöcke, Farben/Schrift/Symbole | erledigt (A4) |
 | S1 | Repo-Skeleton: Layout, `main.py`, `visuals_utils.py`, `requirements.txt`, `LICENSE`, `CITATION.cff`, `.gitignore`, `README.md`, Font-Vendoring | **in Arbeit (dieser Chat)** |
 | S2 | Block 1 — Crossy-Architektur (Banner + 3 Badges + 3 Details) | **erledigt (dieser Chat)** |
-| S3 | Block 2 — Crosswalk-Regeln (Banner + 3 Badges + 4 Details) | offen |
+| S3 | Block 2 — Crosswalk-Regeln (Banner + 3 Badges + 4 Details) | **erledigt (dieser Chat)** |
 | S4 | Block 3 — JNL-Junctions (Banner + 4 Badges + 4 Details) | offen |
 | S5 | Block 4 — CrossyBase-Pipeline (Banner + 4 Badges + 4 Details) | offen |
 | S6 | System-Architektur (konsolidiertes Diagramm) | offen |
@@ -200,6 +200,43 @@ laufen lassen → `git status` bleibt leer.
 - Determinismus doppelt verifiziert: einmal im Sandbox-Build, einmal auf
   einer frisch aus dem S1-Zip wiederhergestellten Kopie mit angewendetem
   Patch — beide Läufe byte-identisch zueinander und über zwei Durchläufe.
+
+### S3 — Block 2: Crosswalk-Regeln
+
+**Ziel:** Banner + 3 Badges + 4 Details für R1–R5 und das Korrespondenztyp-
+Vokabular. Kein Maskottchen (keine Crossy-Variante für "Regeln"), daher die
+Sechs-Kategorie-Palette aus den `.mmd`-Quellen.
+
+**Substanz:**
+- `svg_arrow_labeled()`, `svg_badge_seal()`, `svg_header_seal()` in
+  `visuals_utils.py` — Textsiegel-Badges (farbiger Kreis + Regel-Kürzel)
+  für Blöcke ohne Maskottchen, beschriftete Pfeile für Regel-Kanten.
+- `step_block2.py`: 3 Badges (R1·R2 / R3·R4 / R5), 1 Banner (beide Spuren
+  in einem gestrichelten Container, ein Pfeil runter zu R5/SHACL/KG-Zeile),
+  4 Details (ontology-track, metadata-track, terminology-binding je mit
+  Regeltext als Bildunterschrift; correspondence-types als eigenständiges
+  Referenzdiagramm ohne Badge, drei Ebenen in eigenen Containern).
+
+**Abnahme:** `python main.py --only block2` läuft durch, 16 Dateien; zweimal
+laufen lassen → `git status` bleibt leer.
+
+**Erledigt 2026-09-10:**
+- Layout-Ansatz bewusst vereinfacht gegenüber `fig04_rule_cascade.mmd`: statt
+  jede Spur einzeln zum SHACL-Knoten zu verdrahten (führte beim Entwerfen zu
+  Pfeilen, die durch fremde Boxen laufen, weil beide Spuren dieselben
+  Spalten-x-Positionen belegen), sind beide Spuren in einem gemeinsamen
+  gestrichelten Container zusammengefasst, mit einem einzelnen Pfeil vom
+  Container zur R5/SHACL/KG-Zeile. Präzision pro Regel bleibt den
+  Detail-Diagrammen vorbehalten.
+- Zwei Render-Bugs gefunden und behoben: der Pfeil von "Admissible
+  terminologies" zu den drei Beispiel-Tags zeigte nur auf die mittlere
+  (DANTE) statt auf alle drei — jetzt Fächer-Pfeile zu jedem Tag einzeln;
+  die R5-Bildunterschrift lief rechts aus dem Canvas — Canvas verbreitert
+  und auf zwei Zeilen umgebrochen.
+- Banner hatte ~150px unbenutzten Leerraum am unteren Rand (viewBox-Höhe
+  nicht an den tatsächlichen Inhalt angepasst) — korrigiert.
+- Determinismus doppelt verifiziert (Sandbox-Build + frische Kette aus
+  S1 + allen fünf Block-1-Patches + diesem Patch).
 
 ## Teil D — Offene Punkte
 

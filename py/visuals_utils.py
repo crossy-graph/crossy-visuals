@@ -240,6 +240,22 @@ def svg_arrow(x1: float, y1: float, x2: float, y2: float, *, stroke: str = "#737
             f'stroke="{stroke}" stroke-width="1.5" marker-end="url(#arrow)"/>')
 
 
+def svg_arrow_labeled(x1: float, y1: float, x2: float, y2: float, label: str,
+                       *, stroke: str = "#73726c", label_color: str = "#2c2c2a",
+                       above: bool = True) -> str:
+    """Straight arrow with a short label centred on it. Caller is responsible
+    for leaving enough gap between boxes for the label not to collide with
+    either -- there is no automatic width check here, unlike box_width()."""
+    mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+    dy = -8 if above else 16
+    return (
+        svg_arrow(x1, y1, x2, y2, stroke=stroke)
+        + f'\n<text x="{mx:.1f}" y="{my + dy:.1f}" text-anchor="middle" '
+        f'font-family="Fira Sans" font-weight="500" font-size="12" '
+        f'fill="{label_color}">{label}</text>'
+    )
+
+
 def svg_arrow_l(points: list[tuple[float, float]], *, stroke: str = "#73726c") -> str:
     d = " L ".join(f"{x:.1f} {y:.1f}" for x, y in points)
     return (f'<path d="M {d}" fill="none" stroke="{stroke}" stroke-width="1.5" '
@@ -265,6 +281,39 @@ def svg_badge_medallion(cx: float, cy: float, r: float, data_uri: str,
         f'<image href="{data_uri}" x="{cx - d/2:.1f}" y="{cy - d/2:.1f}" '
         f'width="{d:.1f}" height="{d:.1f}" clip-path="url(#{clip_id})"/>'
     )
+
+
+def svg_badge_seal(cx: float, cy: float, r: float, title: str, subtitle: str,
+                    *, fill: str, stroke: str, text_color: str,
+                    stroke_width: float = 6) -> str:
+    """Text-only badge medallion for blocks with no mascot variant: a
+    coloured circle with a bold rule/id label and a short subtitle. Same
+    visual family as svg_badge_medallion (image-based), used where there is
+    no Crossy skin to crop from."""
+    return (
+        f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.1f}" fill="{fill}" '
+        f'stroke="{stroke}" stroke-width="{stroke_width}"/>\n'
+        f'<text x="{cx:.1f}" y="{cy - 6:.1f}" text-anchor="middle" '
+        f'dominant-baseline="central" font-family="Fira Sans" font-weight="500" '
+        f'font-size="{r * 0.34:.1f}" fill="{text_color}">{title}</text>\n'
+        f'<text x="{cx:.1f}" y="{cy + r * 0.34:.1f}" text-anchor="middle" '
+        f'dominant-baseline="central" font-family="Fira Sans" font-size="{r * 0.15:.1f}" '
+        f'fill="{text_color}" opacity="0.8">{subtitle}</text>'
+    )
+
+
+def svg_header_seal(x: float, y: float, title_badge: str, badge_fill: str, badge_stroke: str,
+                     badge_text_color: str, title: str, subtitle: str, *, badge_r: float = 26) -> str:
+    """Like svg_header, but for a text-seal badge instead of a mascot image."""
+    parts = [svg_badge_seal(x + badge_r, y + badge_r, badge_r, title_badge, "",
+                             fill=badge_fill, stroke=badge_stroke, text_color=badge_text_color,
+                             stroke_width=3)]
+    tx = x + badge_r * 2 + 16
+    parts.append(f'<text x="{tx:.1f}" y="{y + badge_r - 8:.1f}" font-family="Fira Sans" '
+                 f'font-weight="500" font-size="15" fill="#2c2c2a">{title}</text>')
+    parts.append(f'<text x="{tx:.1f}" y="{y + badge_r + 12:.1f}" font-family="Fira Sans" '
+                 f'font-size="12" fill="#5f5e5a">{subtitle}</text>')
+    return "\n".join(parts)
 
 
 def svg_header(x: float, y: float, badge_data_uri: str, badge_fill: str, badge_stroke: str,

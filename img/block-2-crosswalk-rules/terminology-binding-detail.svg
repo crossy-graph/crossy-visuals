@@ -1,0 +1,28 @@
+<svg width="1000" height="400" viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>R5: terminology binding</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#73726c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<circle cx="66.0" cy="56.0" r="26.0" fill="#e2f0dd" stroke="#3d7a2a" stroke-width="3"/>
+<text x="66.0" y="50.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="8.8" fill="#173404">R5</text>
+<text x="66.0" y="64.8" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-size="3.9" fill="#173404" opacity="0.8"></text>
+<text x="108.0" y="48.0" font-family="Fira Sans" font-weight="500" font-size="15" fill="#2c2c2a">Block 2 -- terminology binding</text>
+<text x="108.0" y="68.0" font-family="Fira Sans" font-size="12" fill="#5f5e5a">R5</text>
+<rect x="60.0" y="130.0" width="230.0" height="90.0" rx="10" fill="#dde9fb" stroke="#2a5ab5" stroke-width="1"/>
+<text x="175.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">OCMDP term</text>
+<text x="175.0" y="187.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#042c53" opacity="0.75">concept or entity object</text>
+<line x1="290.0" y1="175.0" x2="380.0" y2="175.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="335.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">R5</text>
+<rect x="380.0" y="130.0" width="280.0" height="90.0" rx="10" fill="#e2f0dd" stroke="#3d7a2a" stroke-width="1"/>
+<text x="520.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#173404">Admissible terminologies</text>
+<text x="520.0" y="187.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#173404" opacity="0.75">one or more may apply</text>
+<line x1="520.0" y1="220.0" x2="366.0" y2="260.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="301.0" y="260.0" width="130.0" height="46.0" rx="23" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+<text x="366.0" y="283.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="14" fill="#2c2c2a">TS4NFDI</text>
+<line x1="520.0" y1="220.0" x2="520.0" y2="260.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="455.0" y="260.0" width="130.0" height="46.0" rx="23" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+<text x="520.0" y="283.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="14" fill="#2c2c2a">DANTE</text>
+<line x1="520.0" y1="220.0" x2="674.0" y2="260.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="609.0" y="260.0" width="130.0" height="46.0" rx="23" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+<text x="674.0" y="283.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="14" fill="#2c2c2a">BARTOC</text>
+<text x="40.0" y="350.0" font-family="Fira Sans" font-size="13" fill="#5f5e5a">R5 — every OCMDP term whose object position takes a concept or an</text>
+<text x="40.0" y="370.0" font-family="Fira Sans" font-size="13" fill="#5f5e5a">identified entity declares which terminologies or authority files may supply that value</text>
+</svg>
