@@ -125,7 +125,7 @@ Entfällt — dieses Repo publiziert keine eigenen IRIs (keine RDF-Ausgabe).
 | S2 | Block 1 — Crossy-Architektur (Banner + 3 Badges + 3 Details) | **erledigt (dieser Chat)** |
 | S3 | Block 2 — Crosswalk-Regeln (Banner + 3 Badges + 4 Details) | **erledigt (dieser Chat)** |
 | S4 | Block 3 — JNL-Junctions (Banner + 4 Badges + 4 Details) | **erledigt (dieser Chat)** |
-| S5 | Block 4 — CrossyBase-Pipeline (Banner + 4 Badges + 4 Details) | offen |
+| S5 | Block 4 — CrossyBase-Pipeline (Banner + 4 Badges + 4 Details) | **erledigt (dieser Chat)** |
 | S6 | System-Architektur (konsolidiertes Diagramm) | offen |
 
 ## Teil C — Die Schritte im Detail
@@ -267,6 +267,43 @@ laufen lassen → `git status` bleibt leer.
   (beide zu nah beieinander) — Abstand vergrößert, Container-Titel gekürzt.
 - Container-Höhe im Banner an den tatsächlichen Inhalt angepasst (vorher
   ~150px unbenutzter Leerraum unten).
+- Determinismus doppelt verifiziert.
+
+### S5 — Block 4: CrossyBase-Pipeline
+
+**Ziel:** Banner + 4 Badges + 4 Details für Curate → Export → Validate →
+Publish. Kein Maskottchen (CrossyBase ist die Kuratierungsumgebung, keiner
+der drei Crossys) — Sechs-Kategorie-Palette, diesmal deckungsgleich mit den
+Original-Farben aus `fig07_export_pipeline.mmd` (`wb`=component/purple,
+`proc`=metadata/blue, `val`=validation/red, `out`=publication/gold).
+
+**Substanz:**
+- Badges als Textsiegel in den vier Stage-Farben.
+- Banner: Migrations-Eingang (Internal spreadsheet) → Curate → Export →
+  Validate → Publish, mit gestrichelter "invalid"-Rückkopplungsschleife
+  von Validate zu Curate (Bogen oberhalb der Hauptkette) und Fächer-Pfeilen
+  von Publish zu drei Reuse-Zielen.
+- 4 Details: `curate-detail` (die fünf Entity-Typen aus Primer 7.2, inkl.
+  Dictionary/Terms/Entities/Profile/Lists-Beziehungen), `export-detail`
+  (SPARQL CONSTRUCT + Python → SKOS/OWL), `validate-detail` (SHACL-Gate mit
+  beiden Ausgängen), `publish-detail` (Fächer zu TS4NFDI/DANTE,
+  NFDI4Objects-KG, Projekt-Reuse).
+
+**Abnahme:** `python main.py --only block4` läuft durch, 18 Dateien; zweimal
+laufen lassen → `git status` bleibt leer.
+
+**Erledigt 2026-09-10:**
+- Banner-Canvas zu schmal für den Reuse-Fächer unter "Publish" — von 1300
+  auf 1500 verbreitert (rechte Box lief sonst aus dem Bild).
+- `curate-detail`: Lücke vor "Entities" zu knapp für das Label "schema
+  junction" — von 90 auf 150px vergrößert (derselbe Fehlertyp wie in S4,
+  jedes Mal manuell zu prüfen, da `svg_arrow_labeled()` die Breite nicht
+  selbst validiert).
+- `validate-detail`: "Back to curation"-Box kollidierte anfangs mit der
+  Bildunterschrift (beide auf derselben y-Position) — Box nach oben, Bild-
+  unterschrift-Start nach unten verschoben, Canvas vergrößert. Der
+  "invalid"-Pfeil zielte zudem knapp daneben (Endpunkt lag rechts neben der
+  Box statt auf ihr) — Zielpunkt auf die Box-Mitte korrigiert.
 - Determinismus doppelt verifiziert.
 
 ## Teil D — Offene Punkte
