@@ -204,6 +204,20 @@ ARROW_DEFS = (
 )
 
 
+def xml_escape(s: str) -> str:
+    """Escape the five XML predefined entities. Every helper that places
+    caller-supplied text into an SVG text node must run it through this --
+    an unescaped ``&`` is a malformed-XML parse failure at render time, not
+    a warning, as ``step_system.py``'s first draft found out."""
+    return (
+        s.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+        .replace("'", "&apos;")
+    )
+
+
 def text_width(s: str, size: int = 14) -> float:
     """Rough width estimate (Fira Sans is close to 0.56*size per character)."""
     return len(s) * size * 0.56
@@ -218,6 +232,7 @@ def box_width(title: str, subtitle: str = "", *, min_width: float = 140, pad: fl
 def svg_box(x: float, y: float, w: float, h: float, title: str, subtitle: str = "",
             *, fill: str = "#f1efe8", stroke: str = "#5f5e5a", text_color: str = "#2c2c2a",
             rx: float = 10) -> str:
+    title, subtitle = xml_escape(title), xml_escape(subtitle)
     parts = [f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" rx="{rx}" '
              f'fill="{fill}" stroke="{stroke}" stroke-width="1"/>']
     cx = x + w / 2
@@ -252,7 +267,7 @@ def svg_arrow_labeled(x1: float, y1: float, x2: float, y2: float, label: str,
         svg_arrow(x1, y1, x2, y2, stroke=stroke)
         + f'\n<text x="{mx:.1f}" y="{my + dy:.1f}" text-anchor="middle" '
         f'font-family="Fira Sans" font-weight="500" font-size="12" '
-        f'fill="{label_color}">{label}</text>'
+        f'fill="{label_color}">{xml_escape(label)}</text>'
     )
 
 
@@ -267,7 +282,7 @@ def svg_dashed_container(x: float, y: float, w: float, h: float, label: str,
     return (f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" rx="16" '
             f'fill="none" stroke="{stroke}" stroke-width="1.5" stroke-dasharray="6 5"/>\n'
             f'<text x="{x + 16:.1f}" y="{y + 26:.1f}" font-family="Fira Sans" '
-            f'font-weight="500" font-size="13" fill="{stroke}">{label}</text>')
+            f'font-weight="500" font-size="13" fill="{stroke}">{xml_escape(label)}</text>')
 
 
 def svg_badge_medallion(cx: float, cy: float, r: float, data_uri: str,
@@ -290,6 +305,7 @@ def svg_badge_seal(cx: float, cy: float, r: float, title: str, subtitle: str,
     coloured circle with a bold rule/id label and a short subtitle. Same
     visual family as svg_badge_medallion (image-based), used where there is
     no Crossy skin to crop from."""
+    title, subtitle = xml_escape(title), xml_escape(subtitle)
     return (
         f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.1f}" fill="{fill}" '
         f'stroke="{stroke}" stroke-width="{stroke_width}"/>\n'
@@ -310,9 +326,9 @@ def svg_header_seal(x: float, y: float, title_badge: str, badge_fill: str, badge
                              stroke_width=3)]
     tx = x + badge_r * 2 + 16
     parts.append(f'<text x="{tx:.1f}" y="{y + badge_r - 8:.1f}" font-family="Fira Sans" '
-                 f'font-weight="500" font-size="15" fill="#2c2c2a">{title}</text>')
+                 f'font-weight="500" font-size="15" fill="#2c2c2a">{xml_escape(title)}</text>')
     parts.append(f'<text x="{tx:.1f}" y="{y + badge_r + 12:.1f}" font-family="Fira Sans" '
-                 f'font-size="12" fill="#5f5e5a">{subtitle}</text>')
+                 f'font-size="12" fill="#5f5e5a">{xml_escape(subtitle)}</text>')
     return "\n".join(parts)
 
 
@@ -324,9 +340,9 @@ def svg_header(x: float, y: float, badge_data_uri: str, badge_fill: str, badge_s
                                   fill=badge_fill, stroke=badge_stroke, stroke_width=3)]
     tx = x + badge_r * 2 + 16
     parts.append(f'<text x="{tx:.1f}" y="{y + badge_r - 8:.1f}" font-family="Fira Sans" '
-                 f'font-weight="500" font-size="15" fill="#2c2c2a">{title}</text>')
+                 f'font-weight="500" font-size="15" fill="#2c2c2a">{xml_escape(title)}</text>')
     parts.append(f'<text x="{tx:.1f}" y="{y + badge_r + 12:.1f}" font-family="Fira Sans" '
-                 f'font-size="12" fill="#5f5e5a">{subtitle}</text>')
+                 f'font-size="12" fill="#5f5e5a">{xml_escape(subtitle)}</text>')
     return "\n".join(parts)
 
 

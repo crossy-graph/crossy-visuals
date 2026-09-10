@@ -167,7 +167,7 @@ def build_banner() -> list[str]:
 def _caption(x: float, y: float, lines: list[str]) -> str:
     return "\n".join(
         f'<text x="{x:.1f}" y="{y + i * 20:.1f}" font-family="Fira Sans" font-size="13" '
-        f'fill="#5f5e5a">{line}</text>' for i, line in enumerate(lines)
+        f'fill="#5f5e5a">{vu.xml_escape(line)}</text>' for i, line in enumerate(lines)
     )
 
 

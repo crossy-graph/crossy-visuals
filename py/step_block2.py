@@ -175,7 +175,7 @@ def _caption(x: float, y: float, lines: list[str]) -> str:
     parts = []
     for i, line in enumerate(lines):
         parts.append(f'<text x="{x:.1f}" y="{y + i * 20:.1f}" font-family="Fira Sans" '
-                     f'font-size="13" fill="#5f5e5a">{line}</text>')
+                     f'font-size="13" fill="#5f5e5a">{vu.xml_escape(line)}</text>')
     return "\n".join(parts)
 
 

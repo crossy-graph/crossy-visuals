@@ -126,7 +126,7 @@ Entfällt — dieses Repo publiziert keine eigenen IRIs (keine RDF-Ausgabe).
 | S3 | Block 2 — Crosswalk-Regeln (Banner + 3 Badges + 4 Details) | **erledigt (dieser Chat)** |
 | S4 | Block 3 — JNL-Junctions (Banner + 4 Badges + 4 Details) | **erledigt (dieser Chat)** |
 | S5 | Block 4 — CrossyBase-Pipeline (Banner + 4 Badges + 4 Details) | **erledigt (dieser Chat)** |
-| S6 | System-Architektur (konsolidiertes Diagramm) | offen |
+| S6 | System-Architektur (konsolidiertes Diagramm) | **erledigt (dieser Chat)** |
 
 ## Teil C — Die Schritte im Detail
 
@@ -305,6 +305,47 @@ laufen lassen → `git status` bleibt leer.
   "invalid"-Pfeil zielte zudem knapp daneben (Endpunkt lag rechts neben der
   Box statt auf ihr) — Zielpunkt auf die Box-Mitte korrigiert.
 - Determinismus doppelt verifiziert.
+
+### S6 — System-Architektur
+
+**Ziel:** ein Bird's-eye-Diagramm, das Block 1 (die drei Crossys, echte
+Maskottchen-Badges), Block 3 (JNL als Kopplung) und Block 4 (CrossyBase-
+Pipeline, gleiche Stufenfarben) zusammenführt — analog zu
+`chublets-software-architecture`.
+
+**Substanz:** `step_system.py` liest Farben/Maskottchen direkt aus den
+bestehenden Konstanten (`COMPONENT_COLORS`, `CATEGORY_COLORS`,
+`crop_badge_image()`) statt sie zu duplizieren. Drei Ebenen: "The Crossys"
+(OCMDP/MaCHeCO-Medaillons oben, JNL-Medaillon mittig darunter mit
+Kopplungslinien zu beiden), Pfeil "curated & validated in" zur
+"CrossyBase pipeline" (Curate→Export→Validate→Publish, mit der
+invalid-Rückkopplungsschleife aus Block 4), Pfeil zur abschließenden
+"Federated knowledge graph ecosystem"-Box.
+
+**Abnahme:** `python main.py --only system` läuft durch, 2 Dateien; zweimal
+laufen lassen → `git status` bleibt leer.
+
+**Erledigt 2026-09-10:**
+- **Echter XML-Bug gefunden und repo-weit behoben:** das Label "curated &
+  validated in" enthielt ein rohes `&` — resvg meldete "malformed entity
+  reference" und der Schritt brach komplett ab (erster Fall, in dem ein
+  Fehler nicht nur eine Überlappung war, sondern den Build tatsächlich zum
+  Scheitern brachte). Ursache: kein Helfer in `visuals_utils.py` escapte
+  je Text in ein SVG-Textelement. Fix: `xml_escape()` ergänzt und in
+  `svg_box`, `svg_arrow_labeled`, `svg_dashed_container`, `svg_badge_seal`,
+  `svg_header`, `svg_header_seal` sowie den drei lokalen `_caption()`-
+  Funktionen in `step_block2/3/4.py` angewendet. Blöcke 1–4 danach erneut
+  gebaut und bestätigt **byte-identisch** zum vorherigen Stand (kein
+  Label dort enthielt Sonderzeichen, der Fix war reine Absicherung).
+- JNL-Label kollidierte zunächst mit dem Container-Rand (Label lag
+  unterhalb der Container-Bottom-Kante) — Container-Höhe und alle
+  nachfolgenden y-Koordinaten angepasst.
+- Determinismus doppelt verifiziert; vollständiger `python main.py`-Lauf
+  (alle fünf Schritte) bestätigt, dass nichts mehr offen ist.
+
+**Damit sind S1–S6 vollständig.** Alle vier Blöcke plus System-Architektur
+sind gebaut, geprüft und committet. Was jetzt noch offen ist, steht in
+Teil D.
 
 ## Teil D — Offene Punkte
 
