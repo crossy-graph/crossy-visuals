@@ -3,3 +3,7 @@
 # svg_to_bytes()'s keyword arguments (this repo relies on font_files and
 # skip_system_fonts) are part of its public API surface, not yet at 1.0.
 resvg-py==0.5.0
+
+# Cropping/compositing the Crossy mascot (img/source/) into badge medallions.
+# Loose pin: only uses Image.open/crop/paste/resize, stable API for years.
+pillow>=10

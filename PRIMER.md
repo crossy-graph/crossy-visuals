@@ -20,6 +20,18 @@ dasselbe informelle Sechs-Farben-Schema (`classDef comp/md/dom/term/val/out`
 mit identischen Hex-Werten in jeder Datei). Das wird als `CATEGORY_COLORS`
 formalisiert statt neu erfunden (siehe A4).
 
+**Befund 2026-09-10 (img/source gesichtet):** Florian hat bereits ein
+fertiges Crossy-Maskottchen (Vektor-SVG + PNG, kein eingebettetes Raster) in
+vier Farbvarianten: `Crossy.png/.svg` (Basis, grau/silber), `Crossy_MaCHeCO`
+(grün), `Crossy_OCMDP` (petrol/teal), `Crossy_OMJO` (violett = **JNL**,
+bestätigt: "OMJO ist Junktion daher das J darin"). Jede Variante zeigt Crossy
+auf einem Wissensgraphen aus Kreisen/Dreiecken/Sternen, durch Pfeile
+verbunden — die Netzwerk-Metapher war schon fertig gezeichnet. Dominante
+Körperfarben aus den PNGs gezogen (`data/raw`-artige Stichprobe, nicht
+Pixel-für-Pixel-exakt): Basis `#909090`, MaCHeCO `#206048`, OCMDP `#386870`,
+JNL `#482870`. Das ersetzt die ursprüngliche Idee einer einzigen
+"Komponenten"-Purpur-Farbe für alle drei Crossys (siehe A4-Revision).
+
 **Korrektur 2026-09-10:** Die ursprünglich für den Foliensatz-Abgleich
 hochgeladene `JCM2026_Muenster_chublets.software.pdf` ist NICHT der
 Crossy/Wien-Vortrag, sondern Florians anderer Münster-Talk (chublets.software
@@ -79,6 +91,10 @@ Eigenschaften, an denen sich ein fertiger Block messen lassen muss:
 | Use-Cases (A1/A2/B1/B2/B3) & NFDI-Bezug | bewusst NICHT Teil dieses Repos — baut Florian direkt in den Slides | 2026-09-10 |
 | `img/source/` | bleibt unverändert, wird direkt im GitHub-Repo von Florian gepflegt, dient als visuelle Referenz, kein Renderinput | 2026-09-10 |
 | Zeitdruck (Vortrag 16.9.) | ausdrücklich kein Kriterium für dieses Repo — "wir brauchen hier nur den Visualisierungsgrundstock" | 2026-09-10 |
+| Komponenten-Farben | **Revision:** nicht ein gemeinsames Purpur für "Komponenten", sondern die echten Maskottchen-Farben pro Crossy — OCMDP Teal `#386870`, MaCHeCO Grün `#206048`, JNL Violett `#482870`, System/neutral Grau `#909090`. Sechs-Kategorie-Schema (validation/publication/…) aus den `.mmd` bleibt für Blöcke 2–4 bestehen, dort gibt es kein Maskottchen | 2026-09-10 |
+| OMJO | = JNL-Variante des Maskottchens ("Junktion", daher J) | 2026-09-10, bestätigt von Florian |
+| Badges als Maskottchen-Ausschnitt | Kopf-Crop (Bildanteil 44–90 % Breite, 0–44 % Höhe, generalisiert über alle vier Varianten), quadratisch gepolstert, als Medaillon (Kreis in Komponentenfarbe) gerahmt | 2026-09-10 |
+| Arrow-Marker in resvg | `context-stroke` (aus dem Chat-Visualizer-Muster übernommen) wird von resvg NICHT unterstützt — Pfeilspitzen blieben unsichtbar. Fest auf `#73726c` gepinnt (`ARROW_STROKE` in `visuals_utils.py`) | 2026-09-10 |
 
 ### A5 Was in welchem Chat hochgeladen wird
 
@@ -104,7 +120,7 @@ Entfällt — dieses Repo publiziert keine eigenen IRIs (keine RDF-Ausgabe).
 |---|---|---|
 | S0 | Entscheidungen: Render-Pipeline, Blöcke, Farben/Schrift/Symbole | erledigt (A4) |
 | S1 | Repo-Skeleton: Layout, `main.py`, `visuals_utils.py`, `requirements.txt`, `LICENSE`, `CITATION.cff`, `.gitignore`, `README.md`, Font-Vendoring | **in Arbeit (dieser Chat)** |
-| S2 | Block 1 — Crossy-Architektur (Banner + 3 Badges + 3 Details) | offen |
+| S2 | Block 1 — Crossy-Architektur (Banner + 3 Badges + 3 Details) | **erledigt (dieser Chat)** |
 | S3 | Block 2 — Crosswalk-Regeln (Banner + 3 Badges + 4 Details) | offen |
 | S4 | Block 3 — JNL-Junctions (Banner + 4 Badges + 4 Details) | offen |
 | S5 | Block 4 — CrossyBase-Pipeline (Banner + 4 Badges + 4 Details) | offen |
@@ -146,19 +162,52 @@ Entfällt — dieses Repo publiziert keine eigenen IRIs (keine RDF-Ausgabe).
   gegen das frisch gebaute Skeleton ausgeführt — siehe "Verifiziert" im
   Lieferungs-Kommentar dieses Chats.
 
+### S2 — Block 1: Crossy-Architektur
+
+**Ziel:** Banner + 3 Badges + 3 Details, mit dem echten Maskottchen statt
+erfundener Node/Edge-Symbolik.
+
+**Substanz:**
+- `crop_badge_image()`, `image_data_uri()`, `SOURCE_MASCOTS`,
+  `COMPONENT_COLORS` in `visuals_utils.py` (liest `img/source/Crossy*.png`,
+  Pillow-Abhängigkeit neu in `requirements.txt`).
+- Generische SVG-Bausteine (`svg_box`, `svg_arrow`, `svg_dashed_container`,
+  `svg_badge_medallion`, `svg_header`, `box_width`/`text_width`) in
+  `visuals_utils.py`, damit `step_block2..4` nicht bei null anfangen.
+- `step_block1.py`: 3 Badges (Medaillon in Komponentenfarbe), 1 Banner
+  (drei Welten, drei Crossys, JNL-Kopplung, KG-Output), 3 Details
+  (OCMDP-Kette, MaCHeCO-Kette, JNL-Hub-Diagramm), jedes Detail mit
+  Badge+Kopfzeile.
+
+**Abnahme:** `python main.py --only block1` läuft durch, 14 Dateien; zweimal
+laufen lassen → `git status` bleibt leer.
+
+**Erledigt 2026-09-10:**
+- `img/source/` erfolgreich über `raw.githubusercontent.com` gezogen (REST-
+  API-Rate-Limit war nur für die `contents`/`git/trees`-Endpunkte relevant,
+  Rohdateien selbst sind öffentlich erreichbar).
+- Kopf-Crop-Fraktion (0.44, 0.0, 0.90, 0.44) gegen Basis- und OCMDP-Variante
+  visuell verifiziert, generalisiert korrekt auf alle vier.
+- Zwei Render-Bugs gefunden und behoben: `context-stroke` an den
+  Pfeilmarkern wird von resvg ignoriert (Pfeilspitzen unsichtbar) → fest auf
+  `#73726c` gepinnt; z-Order im JNL-Detail verdeckte die Pfeilspitzen am
+  Medaillon-Rand → Medaillon zuerst zeichnen, Pfeile und Boxen danach.
+- Determinismus doppelt verifiziert: einmal im Sandbox-Build, einmal auf
+  einer frisch aus dem S1-Zip wiederhergestellten Kopie mit angewendetem
+  Patch — beide Läufe byte-identisch zueinander und über zwei Durchläufe.
+
 ## Teil D — Offene Punkte
 
-- **Byte-Identität noch nicht real verifiziert** — erst möglich, sobald S2
-  eine echte SVG/PNG schreibt. Dann: zweimal `python main.py --only block1`
-  laufen lassen, `git status` und `cmp` auf `img/block-1-*/*.png` prüfen.
-- **`img/source/` Inhalt ungesichtet** — GitHub-REST-API war beim Bau dieses
-  Skeletts rate-limited; welche Rohgrafiken dort genau liegen (Dateinamen,
-  Format) ist unbekannt. Vor S2 kurz nachsehen, ob sie die Blockplanung
-  beeinflussen.
-- **Symbolsprache ist ein Vorschlag** (siehe A4) — laut Absprache "agil
-  anpassen", sobald die ersten Details gezeichnet sind und sich zeigt, ob
-  z. B. Ring/Doppelring bei 24–32 px Badge-Größe überhaupt unterscheidbar
-  bleiben.
+- **Symbolsprache für Block 1 ist jetzt das Maskottchen statt erfundener
+  Node/Edge-Symbole** — für Block 2–4 (keine Maskottchen-Varianten
+  vorhanden) gilt der ursprüngliche Vorschlag aus A4 weiterhin als
+  Ausgangspunkt, "agil anpassen" bleibt in Kraft.
+- **Badge-Einbettung ist Base64 in der SVG-Quelle** — bläht `img/block-1-*/
+  *.svg` auf (~200–650 KB je Datei, PNG-Crop mehrfach eingebettet in Banner
+  + 3 Details + 3 Badges). Funktioniert, ist aber nicht besonders
+  diff-freundlich. Falls das stört: in einem späteren Schritt auf `xlink:href`
+  zu einer einzigen gemeinsamen Datei pro Komponente umstellen, statt der
+  Badge-Bilder in jeder Detail-SVG einzeln.
 - **Anja Gerbers ORCID fehlt** in `CITATION.cff` (TODO-Platzhalter,
   übernommen aus `crossybase-figures/CITATION.cff`, dort ebenfalls offen).
 - **Zenodo-DOI / Versionsnummer** noch nicht vergeben.

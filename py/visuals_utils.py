@@ -101,6 +101,165 @@ SYMBOLS: dict[str, str] = {
 
 FONT_SANS = "Fira Sans"
 
+# --------------------------------------------------------------------------- #
+# Crossy mascot -- Florian's own artwork, img/source/Crossy*.png (+ .svg).
+# Four skins confirmed 2026-09-10 (A4): grey/silver = neutral house colour,
+# green = MaCHeCO, teal = OCMDP, purple = JNL ("OMJO" = the Junction skin).
+# These colours are now authoritative for the three components -- they
+# replace the single shared "component" purple the palette started with.
+# --------------------------------------------------------------------------- #
+SOURCE_MASCOTS: dict[str, Path] = {
+    "system": SOURCE / "Crossy.png",
+    "macheco": SOURCE / "Crossy_MaCHeCO.png",
+    "ocmdp": SOURCE / "Crossy_OCMDP.png",
+    "jnl": SOURCE / "Crossy_OMJO.png",
+}
+
+COMPONENT_COLORS: dict[str, dict[str, str]] = {
+    "system": {"fill": "#e8e8e8", "stroke": "#909090"},
+    "macheco": {"fill": "#dcece3", "stroke": "#206048"},
+    "ocmdp": {"fill": "#dce8ea", "stroke": "#386870"},
+    "jnl": {"fill": "#e6dcee", "stroke": "#482870"},
+}
+
+# Fractional crop box (left, top, right, bottom) that isolates the mascot's
+# head against all four source images -- verified 2026-09-10 against the
+# base, MaCHeCO and OCMDP variants; same composition across all four, so one
+# box generalises (see PRIMER.md S2 "Erledigt").
+BADGE_CROP_BOX = (0.44, 0.0, 0.90, 0.44)
+
+
+def crop_badge_image(component: str, size: int = 480, pad_frac: float = 0.06):
+    """
+    Crop the given component's mascot to a head badge, padded to a square
+    and resized to ``size``x``size``. Returns a PIL Image (RGBA); caller
+    embeds it as a base64 PNG in an SVG wrapper via :func:`image_data_uri`.
+    Requires Pillow, imported lazily.
+    """
+    from PIL import Image
+
+    path = SOURCE_MASCOTS[component]
+    im = Image.open(path).convert("RGBA")
+    w, h = im.size
+    l, t, r, b = BADGE_CROP_BOX
+    box = (int(w * l), int(h * t), int(w * r), int(h * b))
+    crop = im.crop(box)
+    cw, ch = crop.size
+    side = max(cw, ch)
+    pad = int(side * pad_frac)
+    side_padded = side + 2 * pad
+    canvas = Image.new("RGBA", (side_padded, side_padded), (0, 0, 0, 0))
+    canvas.paste(crop, ((side_padded - cw) // 2, (side_padded - ch) // 2), crop)
+    return canvas.resize((size, size), Image.LANCZOS)
+
+
+def image_data_uri(image) -> str:
+    """PNG-encode a PIL Image to a base64 data: URI for inline SVG embedding."""
+    import base64
+    import io
+
+    buf = io.BytesIO()
+    image.save(buf, format="PNG")
+    return "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode("ascii")
+
+
+# --------------------------------------------------------------------------- #
+# Small SVG-building helpers shared by every step_block*.py. Deliberately
+# minimal -- this is not a general diagram library, just enough to stop
+# every step from repeating the same box/arrow math by hand.
+# --------------------------------------------------------------------------- #
+ARROW_STROKE = "#73726c"
+
+# NOTE: the CSS `context-stroke` keyword (used for marker-inherits-line-colour
+# in browser-rendered SVG) is not supported by resvg -- the marker path was
+# rendering with no visible stroke at all until this was pinned to a fixed
+# colour. If arrow colour ever needs to vary per line, define a second
+# named marker rather than relying on context-stroke again (verified
+# 2026-09-10 while building Block 1).
+ARROW_DEFS = (
+    '<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" '
+    'markerWidth="6" markerHeight="6" orient="auto-start-reverse">'
+    f'<path d="M2 1L8 5L2 9" fill="none" stroke="{ARROW_STROKE}" stroke-width="1.5" '
+    'stroke-linecap="round" stroke-linejoin="round"/></marker></defs>'
+)
+
+
+def text_width(s: str, size: int = 14) -> float:
+    """Rough width estimate (Fira Sans is close to 0.56*size per character)."""
+    return len(s) * size * 0.56
+
+
+def box_width(title: str, subtitle: str = "", *, min_width: float = 140, pad: float = 28) -> float:
+    t = text_width(title, 14)
+    s = text_width(subtitle, 12) if subtitle else 0
+    return max(min_width, t + pad, s + pad)
+
+
+def svg_box(x: float, y: float, w: float, h: float, title: str, subtitle: str = "",
+            *, fill: str = "#f1efe8", stroke: str = "#5f5e5a", text_color: str = "#2c2c2a",
+            rx: float = 10) -> str:
+    parts = [f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" rx="{rx}" '
+             f'fill="{fill}" stroke="{stroke}" stroke-width="1"/>']
+    cx = x + w / 2
+    if subtitle:
+        parts.append(f'<text x="{cx:.1f}" y="{y + h/2 - 8:.1f}" text-anchor="middle" '
+                      f'font-family="Fira Sans" font-weight="500" font-size="14" '
+                      f'fill="{text_color}">{title}</text>')
+        parts.append(f'<text x="{cx:.1f}" y="{y + h/2 + 12:.1f}" text-anchor="middle" '
+                      f'font-family="Fira Sans" font-size="12" fill="{text_color}" '
+                      f'opacity="0.75">{subtitle}</text>')
+    else:
+        parts.append(f'<text x="{cx:.1f}" y="{y + h/2:.1f}" text-anchor="middle" '
+                      f'dominant-baseline="central" font-family="Fira Sans" '
+                      f'font-weight="500" font-size="14" fill="{text_color}">{title}</text>')
+    return "\n".join(parts)
+
+
+def svg_arrow(x1: float, y1: float, x2: float, y2: float, *, stroke: str = "#73726c") -> str:
+    return (f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" '
+            f'stroke="{stroke}" stroke-width="1.5" marker-end="url(#arrow)"/>')
+
+
+def svg_arrow_l(points: list[tuple[float, float]], *, stroke: str = "#73726c") -> str:
+    d = " L ".join(f"{x:.1f} {y:.1f}" for x, y in points)
+    return (f'<path d="M {d}" fill="none" stroke="{stroke}" stroke-width="1.5" '
+            f'marker-end="url(#arrow)"/>')
+
+
+def svg_dashed_container(x: float, y: float, w: float, h: float, label: str,
+                          *, stroke: str = "#888780") -> str:
+    return (f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" rx="16" '
+            f'fill="none" stroke="{stroke}" stroke-width="1.5" stroke-dasharray="6 5"/>\n'
+            f'<text x="{x + 16:.1f}" y="{y + 26:.1f}" font-family="Fira Sans" '
+            f'font-weight="500" font-size="13" fill="{stroke}">{label}</text>')
+
+
+def svg_badge_medallion(cx: float, cy: float, r: float, data_uri: str,
+                         *, fill: str, stroke: str, stroke_width: float = 4) -> str:
+    clip_id = f"clip-{int(cx)}-{int(cy)}-{int(r)}"
+    d = r * 2 * 0.975
+    return (
+        f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r + stroke_width/2:.1f}" '
+        f'fill="{fill}" stroke="{stroke}" stroke-width="{stroke_width}"/>\n'
+        f'<clipPath id="{clip_id}"><circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.1f}"/></clipPath>\n'
+        f'<image href="{data_uri}" x="{cx - d/2:.1f}" y="{cy - d/2:.1f}" '
+        f'width="{d:.1f}" height="{d:.1f}" clip-path="url(#{clip_id})"/>'
+    )
+
+
+def svg_header(x: float, y: float, badge_data_uri: str, badge_fill: str, badge_stroke: str,
+               title: str, subtitle: str, *, badge_r: float = 26) -> str:
+    """Small badge + 'Block N - Title' header, repeated atop every detail
+    diagram so it stays visibly tied to its badge (chublets-visuals convention)."""
+    parts = [svg_badge_medallion(x + badge_r, y + badge_r, badge_r, badge_data_uri,
+                                  fill=badge_fill, stroke=badge_stroke, stroke_width=3)]
+    tx = x + badge_r * 2 + 16
+    parts.append(f'<text x="{tx:.1f}" y="{y + badge_r - 8:.1f}" font-family="Fira Sans" '
+                 f'font-weight="500" font-size="15" fill="#2c2c2a">{title}</text>')
+    parts.append(f'<text x="{tx:.1f}" y="{y + badge_r + 12:.1f}" font-family="Fira Sans" '
+                 f'font-size="12" fill="#5f5e5a">{subtitle}</text>')
+    return "\n".join(parts)
+
 
 # --------------------------------------------------------------------------- #
 # Deterministic writers
