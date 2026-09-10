@@ -122,40 +122,55 @@ COMPONENT_COLORS: dict[str, dict[str, str]] = {
     "jnl": {"fill": "#e6dcee", "stroke": "#482870"},
 }
 
-# Fractional crop box (left, top, right, bottom) that isolates the mascot's
-# head against all four source images. Revised 2026-09-10: the first version
-# (0.44, 0.0, 0.90, 0.44) let a fragment of the constellation/graph
-# decoration (a star or triangle node near the front foot) creep into the
-# bottom-right corner on every variant -- Florian caught this from the
-# rendered badges. The SVGs have no named groups/layers (flat list of
-# paths, no inkscape:label), so a clean vector-level "head only" selection
-# isn't practical; tightened the raster crop instead and re-checked against
-# all four variants.
-BADGE_CROP_BOX = (0.46, 0.0, 0.84, 0.40)
+# Head framing for badge medallions. Defined as a vertical span (fractions
+# of image height, constant 2000px across all four source PNGs) plus a
+# horizontal centre point -- the crop is built as an exact square from
+# these two numbers, so no padding is ever added. Three revisions
+# 2026-09-10 (see PRIMER.md A4):
+#   v1 (0.44, 0.0, 0.90, 0.44) rect crop -- star/triangle fragment visible.
+#   v2 (0.46, 0.0, 0.84, 0.40) rect crop -- fragment gone, but the bottom
+#      edge landed on the still-wide neck, reading as a flat cut.
+#   v3 (0.47, 0.0, 0.83, 0.45) rect crop -- taper fixed, but the crop
+#      itself wasn't square: padding it out to a square canvas (pad_frac)
+#      added transparent bands top/bottom that show as a flat colour
+#      "shelf" inside the circle once clipped -- exactly the cut Florian
+#      was still seeing, just one layer further down in the pipeline.
+#   v4 -- square by construction, no padding at all: fixed vertical span,
+#      horizontal centre point, side length = vertical span in pixels.
+#      First pass at 0.45 fixed the flat-band problem but read as too
+#      tightly zoomed in ("das ist zu nah rangezoomt") -- widened the span
+#      to 0.52 for more headroom; still clear of the graph-decoration
+#      fragment (checked against all three coloured variants).
+BADGE_HEAD_TOP_FRAC = 0.0
+BADGE_HEAD_BOTTOM_FRAC = 0.52
+BADGE_HEAD_CENTER_X_FRAC = 0.635
 
 
-def crop_badge_image(component: str, size: int = 480, pad_frac: float = 0.06):
+def crop_badge_image(component: str, size: int = 480):
     """
-    Crop the given component's mascot to a head badge, padded to a square
-    and resized to ``size``x``size``. Returns a PIL Image (RGBA); caller
-    embeds it as a base64 PNG in an SVG wrapper via :func:`image_data_uri`.
-    Requires Pillow, imported lazily.
+    Crop the given component's mascot to a head badge: an exact square, no
+    padding. Vertical span and horizontal centre are fixed fractions
+    (``BADGE_HEAD_*``, tuned against all three coloured variants); the
+    square's side is simply the vertical span in source pixels, so the
+    result is square by construction and needs no transparent fill to
+    square it up afterwards -- that fill was the source of the flat band
+    Florian kept seeing at the bottom of earlier revisions. Returns a PIL
+    Image (RGBA); caller embeds it as a base64 PNG via
+    :func:`image_data_uri`. Requires Pillow, imported lazily.
     """
     from PIL import Image
 
     path = SOURCE_MASCOTS[component]
     im = Image.open(path).convert("RGBA")
     w, h = im.size
-    l, t, r, b = BADGE_CROP_BOX
-    box = (int(w * l), int(h * t), int(w * r), int(h * b))
-    crop = im.crop(box)
-    cw, ch = crop.size
-    side = max(cw, ch)
-    pad = int(side * pad_frac)
-    side_padded = side + 2 * pad
-    canvas = Image.new("RGBA", (side_padded, side_padded), (0, 0, 0, 0))
-    canvas.paste(crop, ((side_padded - cw) // 2, (side_padded - ch) // 2), crop)
-    return canvas.resize((size, size), Image.LANCZOS)
+    top = int(h * BADGE_HEAD_TOP_FRAC)
+    bottom = int(h * BADGE_HEAD_BOTTOM_FRAC)
+    side = bottom - top
+    cx = int(w * BADGE_HEAD_CENTER_X_FRAC)
+    left = cx - side // 2
+    right = left + side
+    crop = im.crop((left, top, right, bottom))
+    return crop.resize((size, size), Image.LANCZOS)
 
 
 def image_data_uri(image) -> str:
