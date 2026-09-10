@@ -124,7 +124,7 @@ Entfällt — dieses Repo publiziert keine eigenen IRIs (keine RDF-Ausgabe).
 | S1 | Repo-Skeleton: Layout, `main.py`, `visuals_utils.py`, `requirements.txt`, `LICENSE`, `CITATION.cff`, `.gitignore`, `README.md`, Font-Vendoring | **in Arbeit (dieser Chat)** |
 | S2 | Block 1 — Crossy-Architektur (Banner + 3 Badges + 3 Details) | **erledigt (dieser Chat)** |
 | S3 | Block 2 — Crosswalk-Regeln (Banner + 3 Badges + 4 Details) | **erledigt (dieser Chat)** |
-| S4 | Block 3 — JNL-Junctions (Banner + 4 Badges + 4 Details) | offen |
+| S4 | Block 3 — JNL-Junctions (Banner + 4 Badges + 4 Details) | **erledigt (dieser Chat)** |
 | S5 | Block 4 — CrossyBase-Pipeline (Banner + 4 Badges + 4 Details) | offen |
 | S6 | System-Architektur (konsolidiertes Diagramm) | offen |
 
@@ -237,6 +237,37 @@ laufen lassen → `git status` bleibt leer.
   nicht an den tatsächlichen Inhalt angepasst) — korrigiert.
 - Determinismus doppelt verifiziert (Sandbox-Build + frische Kette aus
   S1 + allen fünf Block-1-Patches + diesem Patch).
+
+### S4 — Block 3: JNL-Junctions
+
+**Ziel:** die eigentliche 4er-Kette — Banner + 4 Badges + 4 Details für
+Schema-Junction und die drei Instanz-Junctions (Graph, Terminologie ·
+Konzept, Terminologie · Individuum).
+
+**Substanz:**
+- Badges als Textsiegel in JNL-Violett (alle vier sind JNL-Submechanismen);
+  das Maskottchen-Foto erscheint nur einmal, im Banner-Header, nicht viermal.
+- Banner: gestrichelter Container "Schema-level junction" oben, Pfeil
+  "constrains" runter zu gestricheltem Container "Instance-level junctions"
+  mit den drei Mini-Ketten nebeneinander.
+- 4 Details, `schema-junction-detail` zusätzlich mit einer Beispieltabelle
+  (location→Place, related person→Actor, type→Concept aus Primer 4.4.1).
+
+**Abnahme:** `python main.py --only block3` läuft durch, 18 Dateien; zweimal
+laufen lassen → `git status` bleibt leer.
+
+**Erledigt 2026-09-10:**
+- Mehrere Pfeilbeschriftungen liefen anfangs in die Folge-Box hinein
+  ("declares admissible cla|ss", "describ|es", "exactMa|tch", "sameA|s") —
+  Lücken zwischen den Boxen durchgängig vergrößert (Banner-Mini-Ketten von
+  30px auf 90px, Schema-Junction-Detail auf 210px, Graph-Junction-Detail auf
+  170px). `svg_arrow_labeled()` prüft die Lückenbreite nicht automatisch —
+  das bleibt manuelle Sorgfalt beim Bauen jedes Details.
+- Gruppenlabels im Banner kollidierten zunächst mit dem Container-Titel
+  (beide zu nah beieinander) — Abstand vergrößert, Container-Titel gekürzt.
+- Container-Höhe im Banner an den tatsächlichen Inhalt angepasst (vorher
+  ~150px unbenutzter Leerraum unten).
+- Determinismus doppelt verifiziert.
 
 ## Teil D — Offene Punkte
 

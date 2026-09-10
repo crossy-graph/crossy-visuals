@@ -1,0 +1,33 @@
+<svg width="1000" height="420" viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>The schema-level junction</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#73726c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<circle cx="66.0" cy="56.0" r="26.0" fill="#e6dcee" stroke="#482870" stroke-width="3"/>
+<text x="66.0" y="50.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="8.8" fill="#2d1a4a">Schema</text>
+<text x="66.0" y="64.8" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-size="3.9" fill="#2d1a4a" opacity="0.8"></text>
+<text x="108.0" y="48.0" font-family="Fira Sans" font-weight="500" font-size="15" fill="#2c2c2a">Block 3 -- schema-level junction</text>
+<text x="108.0" y="68.0" font-family="Fira Sans" font-size="12" fill="#5f5e5a">asserted once per term</text>
+<rect x="60.0" y="130.0" width="260.0" height="90.0" rx="10" fill="#dde9fb" stroke="#2a5ab5" stroke-width="1"/>
+<text x="190.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">OCMDP term</text>
+<text x="190.0" y="187.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#042c53" opacity="0.75">the property</text>
+<line x1="320.0" y1="175.0" x2="530.0" y2="175.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="425.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">declares admissible class</text>
+<rect x="530.0" y="130.0" width="240.0" height="90.0" rx="10" fill="#fde8dd" stroke="#b5512a" stroke-width="1"/>
+<text x="650.0" y="167.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">MaCHeCO entity</text>
+<text x="650.0" y="187.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#4a1b0c" opacity="0.75">the object position</text>
+<text x="60" y="260" font-family="Fira Sans" font-weight="500" font-size="13" fill="#2c2c2a">Examples</text>
+<rect x="60.0" y="290.0" width="220.0" height="26.0" rx="6" fill="#dde9fb" stroke="#2a5ab5" stroke-width="1"/>
+<text x="170.0" y="303.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">location</text>
+<line x1="280.0" y1="303.0" x2="340.0" y2="303.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="340.0" y="290.0" width="220.0" height="26.0" rx="6" fill="#fde8dd" stroke="#b5512a" stroke-width="1"/>
+<text x="450.0" y="303.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">Place</text>
+<rect x="60.0" y="324.0" width="220.0" height="26.0" rx="6" fill="#dde9fb" stroke="#2a5ab5" stroke-width="1"/>
+<text x="170.0" y="337.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">related person</text>
+<line x1="280.0" y1="337.0" x2="340.0" y2="337.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="340.0" y="324.0" width="220.0" height="26.0" rx="6" fill="#fde8dd" stroke="#b5512a" stroke-width="1"/>
+<text x="450.0" y="337.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">Actor</text>
+<rect x="60.0" y="358.0" width="220.0" height="26.0" rx="6" fill="#dde9fb" stroke="#2a5ab5" stroke-width="1"/>
+<text x="170.0" y="371.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">type</text>
+<line x1="280.0" y1="371.0" x2="340.0" y2="371.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="340.0" y="358.0" width="220.0" height="26.0" rx="6" fill="#fde8dd" stroke="#b5512a" stroke-width="1"/>
+<text x="450.0" y="371.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">Concept</text>
+</svg>

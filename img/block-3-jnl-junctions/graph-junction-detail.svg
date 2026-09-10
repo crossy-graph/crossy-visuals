@@ -1,0 +1,21 @@
+<svg width="960" height="340" viewBox="0 0 960 340" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>The graph junction</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#73726c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<circle cx="66.0" cy="56.0" r="26.0" fill="#e6dcee" stroke="#482870" stroke-width="3"/>
+<text x="66.0" y="50.0" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-weight="500" font-size="8.8" fill="#2d1a4a">Graph</text>
+<text x="66.0" y="64.8" text-anchor="middle" dominant-baseline="central" font-family="Fira Sans" font-size="3.9" fill="#2d1a4a" opacity="0.8"></text>
+<text x="108.0" y="48.0" font-family="Fira Sans" font-weight="500" font-size="15" fill="#2c2c2a">Block 3 -- graph junction</text>
+<text x="108.0" y="68.0" font-family="Fira Sans" font-size="12" fill="#5f5e5a">instance-level</text>
+<rect x="60.0" y="140.0" width="230.0" height="90.0" rx="10" fill="#dde9fb" stroke="#2a5ab5" stroke-width="1"/>
+<text x="175.0" y="177.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#042c53">Metadata resource</text>
+<text x="175.0" y="197.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#042c53" opacity="0.75">dataset, record, FDO</text>
+<text x="175.0" y="254.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#5f5e5a">in the metadata graph</text>
+<line x1="290.0" y1="185.0" x2="460.0" y2="185.0" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="375.0" y="177.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="12" fill="#2c2c2a">describes / is about</text>
+<rect x="460.0" y="140.0" width="230.0" height="90.0" rx="10" fill="#fde8dd" stroke="#b5512a" stroke-width="1"/>
+<text x="575.0" y="177.0" text-anchor="middle" font-family="Fira Sans" font-weight="500" font-size="14" fill="#4a1b0c">Domain entity</text>
+<text x="575.0" y="197.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#4a1b0c" opacity="0.75">e.g. crm:E22, crm:E53</text>
+<text x="575.0" y="254.0" text-anchor="middle" font-family="Fira Sans" font-size="12" fill="#5f5e5a">in the research data graph</text>
+<text x="40.0" y="280.0" font-family="Fira Sans" font-size="13" fill="#5f5e5a">The connection that lets a query start in the metadata graph — a licence, a</text>
+<text x="40.0" y="300.0" font-family="Fira Sans" font-size="13" fill="#5f5e5a">responsible institution — and end in the research data graph, with an object and its find spot.</text>
+</svg>
