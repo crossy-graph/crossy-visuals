@@ -1,0 +1,39 @@
+---
+title: From community curation to published crosswalks
+---
+flowchart LR
+
+    XLS["Internal<br/>spreadsheet"] -. "one-off<br/>migration" .-> WB
+
+    WB["<b>CrossyBase</b><br/>Wikibase Cloud instance<br/><i>community curation</i>"]
+    SPARQL["SPARQL<br/>CONSTRUCT queries"]
+    PY["Python<br/>post-processing"]
+
+    subgraph OUT["Serialisations"]
+        direction TB
+        SKOS["OCMDP<br/>as SKOS"]
+        OWL["MaCHeCO<br/>as OWL"]
+    end
+
+    SHACL{{"SHACL<br/>validation"}}
+
+    subgraph REUSE["Publication and reuse"]
+        direction TB
+        TS["TS4NFDI / DANTE"]
+        N4O["NFDI4Objects<br/>Knowledge Graph"]
+        APP["Application<br/>projects"]
+    end
+
+    WB --> SPARQL --> PY --> OUT
+    OUT --> SHACL
+    SHACL -- "valid" --> REUSE
+    SHACL -- "invalid" --> WB
+
+    classDef wb fill:#e8e0f5,stroke:#5b3fa0,color:#000
+    classDef proc fill:#dde9fb,stroke:#2a5ab5,color:#000
+    classDef val fill:#f5dede,stroke:#a03030,color:#000
+    classDef out fill:#f5f0d8,stroke:#8a7420,color:#000
+    class WB wb
+    class SPARQL,PY,XLS proc
+    class SHACL val
+    class SKOS,OWL,TS,N4O,APP out

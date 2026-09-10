@@ -1,0 +1,28 @@
+# --- Python ---
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+ENV/
+
+# --- Editors / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Note ---
+# img/ (banners, badges, details as .svg + .png) IS generated but IS
+# tracked: it is the repository's citable, versioned product, same as
+# crossybase-figures' mmd/ and img/. img/source/ holds Florian's raw
+# reference graphics and is likewise tracked, untouched by any script here.

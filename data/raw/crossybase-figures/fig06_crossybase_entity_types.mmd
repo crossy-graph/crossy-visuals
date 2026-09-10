@@ -1,0 +1,30 @@
+---
+title: The five entity types of the CrossyBase
+---
+flowchart TB
+
+    DICT["<b>Dictionary</b><br/>terms that set profile-specific<br/>attributes<br/><i>degree of commitment, data type,<br/>repeatable, uncertainty, type</i>"]
+    TERMS["<b>Terms</b><br/>properties describing the<br/>Object Core Metadata Profile<br/><i>edges / relations</i>"]
+    ENT["<b>Entities</b><br/>classes interlinking with the<br/>research data graph<br/><i>CIDOC CRM, PROV, BFO, DCAT, ...</i>"]
+    PROF["<b>Profile</b><br/>sub-sets of the OCMDP<br/><i>Minimaldatensatz (minimum record),<br/>software metadata, fuzzy-sl,<br/>open-archaeo, Provenienz-Matrix</i>"]
+    LISTS["<b>Lists</b><br/>controlled lists of items used<br/>in one sub-profile<br/><i>drop-down values</i>"]
+
+    DICT -- "qualifies" --> TERMS
+    TERMS -- "is grouped by" --> PROF
+    TERMS -- "schema-level junction" --> ENT
+    LISTS -- "provides values for" --> TERMS
+    PROF == "owns<br/>1 profile : n lists" ==> LISTS
+
+    TERMS -. "broader / narrower<br/>within the type" .-> TERMS
+    ENT -. "broader / narrower<br/>within the type" .-> ENT
+
+    classDef dict fill:#f5f0d8,stroke:#8a7420,color:#000
+    classDef terms fill:#dde9fb,stroke:#2a5ab5,color:#000
+    classDef ent fill:#fde8dd,stroke:#b5512a,color:#000
+    classDef prof fill:#e8e0f5,stroke:#5b3fa0,color:#000
+    classDef lists fill:#e2f0dd,stroke:#3d7a2a,color:#000
+    class DICT dict
+    class TERMS terms
+    class ENT ent
+    class PROF prof
+    class LISTS lists

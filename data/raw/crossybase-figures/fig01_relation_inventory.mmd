@@ -1,0 +1,42 @@
+---
+title: Types of correspondence used by the Crossys
+---
+flowchart LR
+
+    subgraph ONT["Ontology level — classes / nodes"]
+        direction LR
+        AOC["Application<br/>ontology class"]
+        CRM["CIDOC CRM class<br/>(+ extensions)"]
+        BFO["BFO / NFDIcore<br/>class"]
+    end
+
+    subgraph MD["Metadata level — properties / edges"]
+        direction LR
+        AME["Application metadata<br/>element"]
+        OCT["OCMDP term"]
+        NCM["NCMDP element<br/>(DataCite, DCAT, schema.org)"]
+    end
+
+    subgraph TERM["Terminology level — concepts / individuals"]
+        direction LR
+        NOC["Node object<br/>as concept"]
+        TC["Terminology concept<br/>(Getty AAT, DANTE, ...)"]
+        INS["Instance of<br/>a domain class"]
+        AI["Authority item<br/>(Wikidata, GeoNames, OSM)"]
+    end
+
+    AOC -- "rdfs:subClassOf<br/>owl:equivalentClass" --> CRM
+    CRM -- "rdfs:subClassOf<br/>owl:equivalentClass" --> BFO
+
+    AME -- "skos:exactMatch | closeMatch<br/>broadMatch | narrowMatch | relatedMatch" --> OCT
+    OCT -- "skos:exactMatch | closeMatch<br/>broadMatch | narrowMatch | relatedMatch" --> NCM
+
+    NOC -- "skos:exactMatch" --> TC
+    INS -- "owl:sameAs" --> AI
+
+    classDef ont fill:#fde8dd,stroke:#b5512a,color:#000
+    classDef md fill:#dde9fb,stroke:#2a5ab5,color:#000
+    classDef term fill:#e2f0dd,stroke:#3d7a2a,color:#000
+    class AOC,CRM,BFO ont
+    class AME,OCT,NCM md
+    class NOC,TC,INS,AI term

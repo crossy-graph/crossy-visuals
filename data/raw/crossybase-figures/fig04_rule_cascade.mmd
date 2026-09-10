@@ -1,0 +1,44 @@
+---
+title: Crosswalk rules as a cascade towards the federated knowledge graphs
+---
+flowchart LR
+
+    subgraph R_MD["Metadata track"]
+        direction LR
+        AMS["Application<br/>metadata element"]
+        OCMDP["OCMDP term"]
+        NCMDP["NCMDP element"]
+        AMS -- "<b>R3</b> every element of an application<br/>metadata schema maps to an OCMDP term" --> OCMDP
+        OCMDP -- "<b>R4</b> every OCMDP term is<br/>crosswalked to the NCMDP" --> NCMDP
+    end
+
+    subgraph R_ONT["Ontology track"]
+        direction LR
+        AO["Application<br/>ontology class"]
+        CRM["CIDOC CRM class"]
+        BFO["BFO / NFDIcore class"]
+        AO -- "<b>R1</b> every class references<br/>a CIDOC CRM class" --> CRM
+        CRM -- "<b>R2</b> CIDOC CRM classes are<br/>aligned to BFO / NFDIcore" --> BFO
+    end
+
+    VOC["Admissible<br/>terminologies"]
+    OCMDP -- "<b>R5</b> every node object declares<br/>its admissible terminologies" --> VOC
+
+    NCMDP --> KG(["Ingest into the federated<br/>knowledge graph ecosystem"])
+    BFO --> KG
+    VOC --> KG
+
+    SHACL{{"SHACL validation<br/>R1–R5 as shapes"}}
+    SHACL -. "validates" .-> R_MD
+    SHACL -. "validates" .-> R_ONT
+
+    classDef md fill:#dde9fb,stroke:#2a5ab5,color:#000
+    classDef dom fill:#fde8dd,stroke:#b5512a,color:#000
+    classDef term fill:#e2f0dd,stroke:#3d7a2a,color:#000
+    classDef val fill:#f5dede,stroke:#a03030,color:#000
+    classDef out fill:#f5f0d8,stroke:#8a7420,color:#000
+    class AMS,OCMDP,NCMDP md
+    class AO,CRM,BFO dom
+    class VOC term
+    class SHACL val
+    class KG out

@@ -1,0 +1,56 @@
+---
+title: The Crossys as crosswalk components in a layered architecture
+---
+flowchart TB
+
+    subgraph MW["Metadata world"]
+        direction TB
+        AMS["Application metadata schemata<br/><i>Minimaldatensatz (minimum record), software<br/>metadata, fuzzy-sl, open-archaeo, ...</i>"]
+        NCMDP["NFDI Core Metadata Profile<br/>DataCite · DCAT · schema.org"]
+    end
+
+    subgraph DW["Research data world"]
+        direction TB
+        AO["Application ontologies<br/><i>LADO, ArNO, geo-lod, Ogham, ...</i>"]
+        CRM["CIDOC CRM 7.1.3 + extensions"]
+        BFO["BFO / NFDIcore"]
+    end
+
+    subgraph TW["Terminology world"]
+        direction TB
+        VOC["Controlled vocabularies,<br/>thesauri, authority files<br/><i>via TS4NFDI, DANTE, BARTOC</i>"]
+    end
+
+    subgraph CROSSYS["The Crossys — crosswalk components"]
+        direction TB
+        OCMDP["<b>OCMDP</b><br/>Object Core Metadata Profile<br/><i>properties / edges</i>"]
+        MACHECO["<b>MaCHeCO</b><br/>Material Cultural Heritage Crosswalk Ontology<br/><i>classes / nodes</i>"]
+        JNL["<b>JNL</b><br/>Junction Node Layer<br/><i>couples the components<br/>and binds terminologies</i>"]
+    end
+
+    KG(["NFDI4Objects Knowledge Graph<br/>+ federated NFDI metadata graph"])
+
+    AMS --> OCMDP
+    OCMDP --> NCMDP
+    AO --> MACHECO
+    MACHECO --> CRM
+    CRM --> BFO
+
+    OCMDP <--> JNL
+    MACHECO <--> JNL
+    JNL <--> VOC
+
+    NCMDP --> KG
+    BFO --> KG
+    JNL --> KG
+
+    classDef comp fill:#e8e0f5,stroke:#5b3fa0,color:#000
+    classDef md fill:#dde9fb,stroke:#2a5ab5,color:#000
+    classDef dom fill:#fde8dd,stroke:#b5512a,color:#000
+    classDef term fill:#e2f0dd,stroke:#3d7a2a,color:#000
+    classDef out fill:#f5f0d8,stroke:#8a7420,color:#000
+    class OCMDP,MACHECO,JNL comp
+    class AMS,NCMDP md
+    class AO,CRM,BFO dom
+    class VOC term
+    class KG out

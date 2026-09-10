@@ -1,0 +1,105 @@
+---
+title: Anatomy of a crosswalk statement and of an OCMDP term
+---
+classDiagram
+    direction TB
+
+    class CrosswalkStatement {
+        +sourceTerm : CrossyItem
+        +targetTerm : CrossyItem
+        +matchType : MatchType
+        +direction : Direction
+        +scopeNote : string
+        +justification : string
+    }
+
+    class Provenance {
+        +assertedBy : Agent
+        +assertedOn : date
+        +status : Status
+        +revision : string
+    }
+
+    class MatchType {
+        <<enumeration>>
+        rdfs_subClassOf
+        owl_equivalentClass
+        owl_sameAs
+        skos_exactMatch
+        skos_closeMatch
+        skos_broadMatch
+        skos_narrowMatch
+        skos_relatedMatch
+    }
+
+    class Direction {
+        <<enumeration>>
+        symmetric
+        directed
+    }
+
+    class Status {
+        <<enumeration>>
+        draft
+        proposed
+        accepted
+        deprecated
+    }
+
+    class DegreeOfCommitment {
+        <<enumeration>>
+        mandatory
+        conditionally_mandatory
+        recommended
+        optional
+    }
+
+    class DataType {
+        <<enumeration>>
+        literal
+        resource
+        string
+        decimal
+        date
+        boolean
+        language
+        terminology_term
+    }
+
+    class Source {
+        +label : string
+        +version : string
+        +namespace : IRI
+    }
+
+    class OCMDPTerm {
+        +notation : string
+        +prefLabel : string
+        +altLabel : string
+        +definition : string
+        +scopeNote : string
+        +broader : OCMDPTerm
+        +degreeOfCommitment : DegreeOfCommitment
+        +dataType : DataType
+        +repeatable : boolean
+        +uncertainty : boolean
+        +recommendedTerminology : Source
+    }
+
+    class MaCHeCOEntity {
+        +notation : string
+        +prefLabel : string
+        +definition : string
+        +broader : MaCHeCOEntity
+    }
+
+    CrosswalkStatement --> MatchType : uses
+    CrosswalkStatement --> Direction : has
+    CrosswalkStatement --> Provenance : carries
+    CrosswalkStatement --> Source : source and target versioned against
+    Provenance --> Status : has
+    OCMDPTerm --> DegreeOfCommitment : has
+    OCMDPTerm --> DataType : has
+    OCMDPTerm --> CrosswalkStatement : is subject of
+    MaCHeCOEntity --> CrosswalkStatement : is subject of
+    OCMDPTerm --> MaCHeCOEntity : schema-level junction

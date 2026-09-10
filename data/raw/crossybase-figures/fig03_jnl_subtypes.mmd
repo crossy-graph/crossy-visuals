@@ -1,0 +1,43 @@
+---
+title: Junction Node Layer — schema-level and instance-level junctions
+---
+flowchart TB
+
+    subgraph SL["Schema-level junction"]
+        direction LR
+        OCT["OCMDP term<br/><i>e.g. 'location'</i>"]
+        MCE["MaCHeCO entity<br/><i>e.g. E53 Place</i>"]
+        OCT -- "declares admissible<br/>object class" --> MCE
+    end
+
+    subgraph IL["Instance-level junctions"]
+        direction TB
+
+        subgraph GJ["Graph junction"]
+            direction LR
+            MR["Metadata resource<br/><i>dcat:Dataset, FDO, record</i>"]
+            DE["Domain entity<br/><i>crm:E22, crm:E53, ...</i>"]
+            MR -- "describes / is about" --> DE
+        end
+
+        subgraph TJ["Terminology junction"]
+            direction LR
+            NOC["Node object<br/>as concept"]
+            TC["Terminology concept<br/><i>Getty AAT, DANTE</i>"]
+            IND["Individual<br/><i>a specific place, object</i>"]
+            AI["Authority item<br/><i>Wikidata, GeoNames, OSM</i>"]
+            NOC -- "skos:exactMatch" --> TC
+            IND -- "owl:sameAs" --> AI
+        end
+    end
+
+    SL -. "constrains" .-> IL
+    MDG(["Metadata graph"]) --- MR
+    RDG(["Research data graph"]) --- DE
+
+    classDef md fill:#dde9fb,stroke:#2a5ab5,color:#000
+    classDef dom fill:#fde8dd,stroke:#b5512a,color:#000
+    classDef term fill:#e2f0dd,stroke:#3d7a2a,color:#000
+    class OCT,MR,MDG md
+    class MCE,DE,RDG dom
+    class NOC,TC,IND,AI term
