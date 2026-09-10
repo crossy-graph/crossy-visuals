@@ -26,3 +26,5 @@ Thumbs.db
 # tracked: it is the repository's citable, versioned product, same as
 # crossybase-figures' mmd/ and img/. img/source/ holds Florian's raw
 # reference graphics and is likewise tracked, untouched by any script here.
+
+PATCH-README.md
