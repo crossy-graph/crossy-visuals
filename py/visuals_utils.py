@@ -123,10 +123,15 @@ COMPONENT_COLORS: dict[str, dict[str, str]] = {
 }
 
 # Fractional crop box (left, top, right, bottom) that isolates the mascot's
-# head against all four source images -- verified 2026-09-10 against the
-# base, MaCHeCO and OCMDP variants; same composition across all four, so one
-# box generalises (see PRIMER.md S2 "Erledigt").
-BADGE_CROP_BOX = (0.44, 0.0, 0.90, 0.44)
+# head against all four source images. Revised 2026-09-10: the first version
+# (0.44, 0.0, 0.90, 0.44) let a fragment of the constellation/graph
+# decoration (a star or triangle node near the front foot) creep into the
+# bottom-right corner on every variant -- Florian caught this from the
+# rendered badges. The SVGs have no named groups/layers (flat list of
+# paths, no inkscape:label), so a clean vector-level "head only" selection
+# isn't practical; tightened the raster crop instead and re-checked against
+# all four variants.
+BADGE_CROP_BOX = (0.46, 0.0, 0.84, 0.40)
 
 
 def crop_badge_image(component: str, size: int = 480, pad_frac: float = 0.06):

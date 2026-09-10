@@ -94,6 +94,7 @@ Eigenschaften, an denen sich ein fertiger Block messen lassen muss:
 | Komponenten-Farben | **Revision:** nicht ein gemeinsames Purpur für "Komponenten", sondern die echten Maskottchen-Farben pro Crossy — OCMDP Teal `#386870`, MaCHeCO Grün `#206048`, JNL Violett `#482870`, System/neutral Grau `#909090`. Sechs-Kategorie-Schema (validation/publication/…) aus den `.mmd` bleibt für Blöcke 2–4 bestehen, dort gibt es kein Maskottchen | 2026-09-10 |
 | OMJO | = JNL-Variante des Maskottchens ("Junktion", daher J) | 2026-09-10, bestätigt von Florian |
 | Badges als Maskottchen-Ausschnitt | Kopf-Crop (Bildanteil 44–90 % Breite, 0–44 % Höhe, generalisiert über alle vier Varianten), quadratisch gepolstert, als Medaillon (Kreis in Komponentenfarbe) gerahmt | 2026-09-10 |
+| Kopf-Crop-Fraktion | **Korrektur:** `(0.44, 0.0, 0.90, 0.44)` ließ ein Stern-/Dreieck-Fragment der Graph-Dekoration am rechten unteren Rand jeder Badge-Variante stehen (Florian hat es an den gerenderten Badges gesehen). Neu: `(0.46, 0.0, 0.84, 0.40)`, gegen alle vier Varianten geprüft, keine Fragmente mehr, Kopf mittig | 2026-09-10 |
 | Arrow-Marker in resvg | `context-stroke` (aus dem Chat-Visualizer-Muster übernommen) wird von resvg NICHT unterstützt — Pfeilspitzen blieben unsichtbar. Fest auf `#73726c` gepinnt (`ARROW_STROKE` in `visuals_utils.py`) | 2026-09-10 |
 
 ### A5 Was in welchem Chat hochgeladen wird
@@ -186,8 +187,11 @@ laufen lassen → `git status` bleibt leer.
 - `img/source/` erfolgreich über `raw.githubusercontent.com` gezogen (REST-
   API-Rate-Limit war nur für die `contents`/`git/trees`-Endpunkte relevant,
   Rohdateien selbst sind öffentlich erreichbar).
-- Kopf-Crop-Fraktion (0.44, 0.0, 0.90, 0.44) gegen Basis- und OCMDP-Variante
-  visuell verifiziert, generalisiert korrekt auf alle vier.
+- Kopf-Crop-Fraktion zunächst als (0.44, 0.0, 0.90, 0.44) gegen Basis- und
+  OCMDP-Variante visuell verifiziert; **nach Feedback korrigiert** auf
+  (0.46, 0.0, 0.84, 0.40), weil die erste Fassung ein Fragment der
+  Graph-Dekoration (Stern/Dreieck) am Bildrand stehen ließ. Zweite Fassung
+  gegen alle vier Varianten geprüft.
 - Zwei Render-Bugs gefunden und behoben: `context-stroke` an den
   Pfeilmarkern wird von resvg ignoriert (Pfeilspitzen unsichtbar) → fest auf
   `#73726c` gepinnt; z-Order im JNL-Detail verdeckte die Pfeilspitzen am
